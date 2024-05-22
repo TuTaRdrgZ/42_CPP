@@ -6,13 +6,12 @@
 /*   By: bautrodr <bautrodr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:00:44 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/05/21 15:50:07 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:30:37 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_HPP
 #   define CONTACT_HPP
-
 #   include <iostream>
 #   include <iomanip>
 
@@ -31,5 +30,6 @@ class Contact
         void display_all(void);
         void display_details(void);
         std::string get_str(std::string str);
+		static bool isNumeric(const std::string& str);
 };
 #endif

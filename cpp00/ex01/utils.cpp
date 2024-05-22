@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contact.cpp                                        :+:      :+:    :+:   */
+/*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:57:01 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/05/21 19:33:53 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:52:35 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
 #include "contact.hpp"
 
-std::string Contact::get_str(std::string str)
+bool Contact::isNumeric(const std::string& str)
 {
-	if (str.length() < 10)
-		return str;
-	else
-	{
-		std::string t = str.substr(0, 9);
-		t += '.';
-		return t;
-	}
+    if (str.empty()) {
+        return false;
+    }
+    for (size_t i = 0; i < str.length(); ++i) {
+        if (!std::isdigit(str[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void	Contact::display_all()
+{
+	std::cout << this->_first_name << std::endl;
+	std::cout << this->_last_name << std::endl;
+	std::cout << this->_nickname << std::endl;
+	std::cout << this->_phonenumber << std::endl;
 }
 
 void Contact::set_data(std::string f, std::string l, std::string n, std::string p, std::string d, int i)
@@ -32,15 +42,6 @@ void Contact::set_data(std::string f, std::string l, std::string n, std::string 
 	this->_phonenumber = p;
 	this->_darkest_secret = d;
 	this->_index = i;
-}
-
-void Contact::display_all(void)
-{
-	std::cout << '|' << std::setw(10) << this->_index << '|'
-			  << std::setw(10) << get_str(this->_first_name) << '|'
-			  << std::setw(10) << get_str(this->_last_name) << '|'
-			  << std::setw(10) << get_str(this->_nickname) << '|' << std::endl;
-	std::cout << " --------------------------------------------" << std::endl;
 }
 
 void Contact::display_details(void)
