@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:59:07 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/05/22 12:49:04 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:16:57 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 #include <ostream>
 #include <string>
 
-PhoneBook::PhoneBook() : _size(0), _counter(0) {}
+PhoneBook::PhoneBook(void) : _counter(-1), _size(0) {}
 
 void	PhoneBook::display_phonebook(int nb)
 {
 	if (nb == -1)
 	{
-		std::cout << "Index | First Name | Last name | Phone number" << std::endl;
+		std::cout << "┌--------------------------------------------------┐" << std::endl;
+		std::cout << '|' << std::setw(10) << "index" << " | "
+				  << std::setw(10) << "first name" << " | "
+				  << std::setw(10) << "last name" << " | "
+				  << std::setw(10) << "nick name" << " | " << std::endl;
+		std::cout << "┣--------------------------------------------------┤" << std::endl;
 		for (int i=0; i < PhoneBook::_size; ++i)
 			this->_contacts[i].display_all();
 	}
