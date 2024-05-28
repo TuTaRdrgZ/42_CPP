@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:52:04 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/05/22 12:49:12 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:37:07 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ int main(void)
 {
 	PhoneBook phoneBook;
 	std::string cmd;
-	std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
+		std::cout << "┌--------------------------------------------------┐" << std::endl;
+	std::cout << "| Enter a command (ADD, SEARCH, EXIT): ";
 	while (std::getline(std::cin, cmd))
 	{
+        std::cout << "┣--------------------------------------------------┤" << std::endl;
 		if (cmd == "ADD" || cmd == "add" || cmd == "1")
 			phoneBook.add_contact();
 		else if (cmd == "SEARCH" || cmd == "search" || cmd == "2")
@@ -26,7 +28,8 @@ int main(void)
 		else if (cmd == "EXIT" || cmd == "exit" || cmd == "3")
 			return (0);
 		else
-			std::cout << "Invalid cmd" << std::endl;
-	    std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
+            clearScreen();
+		std::cout << "┌--------------------------------------------------┐" << std::endl;
+	    std::cout << "| Enter a command (ADD, SEARCH, EXIT): ";
 	}
 }

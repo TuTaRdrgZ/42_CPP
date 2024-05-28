@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:59:07 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/05/22 12:11:36 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:36:32 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,6 @@ class PhoneBook
         void add_contact(void);
         void search_contact(void);
 };
+
+void clearScreen();
 #endif
