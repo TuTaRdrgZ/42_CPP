@@ -18,7 +18,6 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const int intValue)
 {
-	// shifts the bits in num [_fractional] positions to the left.
 	this->_value = (intValue << this->_fBits);
 	std::cout << "Int constructor called" << std::endl;
 
@@ -49,4 +48,14 @@ void Fixed::setRawBits(int const raw)
 {
 	std::cout << "setRawBits function called" << std::endl;
 	_value = raw;
+}
+
+float Fixed::toFloat(void) const
+{
+	return ((float)this->_value / 256);
+}
+
+int Fixed::toInt(void) const
+{
+	return this->_value >> this->_fBits;
 }

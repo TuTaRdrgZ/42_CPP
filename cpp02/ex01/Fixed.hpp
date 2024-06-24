@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 18:14:14 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/20 18:48:27 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/06/24 09:54:59 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ class Fixed
 
 		int getRawBits() const;
 		void setRawBits(int const raw);
+		float toFloat(void) const;
+		int toInt(void) const;
 };
 
 #endif
