@@ -6,21 +6,31 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:36:26 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/17 16:45:52 by tuta             ###   ########.fr       */
+/*   Updated: 2024/07/18 22:29:14 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
 
-int main( void )
+int main(void)
 {
-	// add the bsp tests here
-	std::cout << bsp(Point(0, 0), Point(0, 1), Point(1, 0), Point(0.5f, 0.5f)) << std::endl; // should return true
-	std::cout << bsp(Point(0, 0), Point(0, 1), Point(1, 0), Point(1, 1)) << std::endl; // should return false
+	// First triangle
+	Point a(Fixed(0), Fixed(0));
+    Point b(Fixed(3), Fixed(0));
+    Point c(Fixed(0), Fixed(4));
 
-	Point a(3, 5);
-	Point b(1, 1);
-	Point c(5, 1);
+	// Second triangle
+	Point a1(Fixed(8), Fixed(0));
+    Point b1(Fixed(0), Fixed(8));
+    Point c1(Fixed(0), Fixed(3));
+	
+    Point p(Fixed(1), Fixed(1));
+    Point p1(Fixed(2), Fixed(1));
+    Point p2(Fixed(8), Fixed(4));
+
+    std::cout << (bsp(a, b, c, p)) << std::endl;
+    std::cout << (bsp(a, b, c, p1)) << std::endl;
+	std::cout << (bsp(a1,b1,c1,p2)) << std::endl;
 
 	return (0);
 }
