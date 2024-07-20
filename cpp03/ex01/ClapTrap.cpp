@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:54:24 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/18 20:08:03 by tuta             ###   ########.fr       */
+/*   Updated: 2024/07/20 13:21:04 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ std::string ClapTrap::getName()
 	return _name;
 }
 
-bool canAttack(ClapTrap claptrap)
+bool ClapTrap::canAttack(ClapTrap claptrap)
 {
 	if (claptrap.getHitPoints() <= 0 || claptrap.getEnergyPoints() <= 0)
 	{

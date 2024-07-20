@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:54:16 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/17 18:11:27 by tuta             ###   ########.fr       */
+/*   Updated: 2024/07/20 13:21:41 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 class ClapTrap
 {
-	private:
+	protected:
 		std::string _name;
 		int _hitPoints;
 		int _energyPoints;
@@ -36,6 +36,7 @@ class ClapTrap
 		int getHitPoints();
 		int getEnergyPoints();
 		int getAttackDamage();
+		bool canAttack(ClapTrap claptrap);
 };
 
 #endif

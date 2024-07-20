@@ -6,30 +6,30 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:50:32 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/18 20:07:20 by tuta             ###   ########.fr       */
+/*   Updated: 2024/07/20 13:30:39 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main()
 {
-	ClapTrap clapTrap("tuta");
+    // Crear una instancia de ClapTrap
+    ClapTrap claptrap("clap-trap");
+    
+    // Llamar a los métodos de ClapTrap
+    claptrap.attack("target1");
+    claptrap.takeDamage(5);
+    claptrap.beRepaired(3);
 
-	ClapTrap clapTrap2;
-	ClapTrap clapTrap3("asdf");
+    // Crear una instancia de ScavTrap
+    ScavTrap scavtrap("scav-trap");
 
-	clapTrap.attack("enemy");
-	clapTrap.takeDamage(4);
-	clapTrap.beRepaired(5);
+    // Llamar a los métodos de ScavTrap
+    scavtrap.attack("target2");
+    scavtrap.takeDamage(30);
+    scavtrap.beRepaired(15);
+    scavtrap.guardGate();
 
-	clapTrap2.attack("enemy");
-	clapTrap2.takeDamage(1);
-	clapTrap2.beRepaired(5);
-
-	clapTrap3.attack("enemy");
-	clapTrap3.takeDamage(1);
-	clapTrap3.beRepaired(5);
-
-	return 0;
+    return 0;
 }
