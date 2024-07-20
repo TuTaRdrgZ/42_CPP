@@ -6,12 +6,11 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:05:59 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/20 13:49:28 by tuta             ###   ########.fr       */
+/*   Updated: 2024/07/20 13:50:29 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
-#include <iostream>
 
 ScavTrap::ScavTrap() : ClapTrap()
 {

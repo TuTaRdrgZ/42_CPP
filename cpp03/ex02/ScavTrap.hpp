@@ -6,14 +6,13 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:57:54 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/20 13:38:54 by tuta             ###   ########.fr       */
+/*   Updated: 2024/07/20 13:50:20 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCAVTRAP_HPP
 # define SCAVTRAP_HPP
 
-#include <string>
 #include "ClapTrap.hpp"
 
 class ScavTrap : public ClapTrap
