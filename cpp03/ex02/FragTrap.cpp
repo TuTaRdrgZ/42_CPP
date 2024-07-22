@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:33:15 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/20 13:55:38 by tuta             ###   ########.fr       */
+/*   Updated: 2024/07/22 12:44:27 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ FragTrap::FragTrap(const FragTrap& fragtrap) : ClapTrap(fragtrap)
 
 FragTrap &FragTrap::operator=(const FragTrap &fragtrap)
 {
+	std::cout << "FragTrap assignation operator called" << std::endl;
 	if (this == &fragtrap)
 		return *this;
 	_name = fragtrap._name;
