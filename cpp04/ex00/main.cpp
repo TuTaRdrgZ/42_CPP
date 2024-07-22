@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 12:47:33 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/22 15:09:09 by tuta             ###   ########.fr       */
+/*   Updated: 2024/07/22 15:14:56 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,10 @@ int main()
 	meta->makeSound();
 	std::cout << "Wrong : ";
 	wrongcat->makeSound();
+
+	delete meta;
+	delete j;
+	delete i;
+	delete wrongcat;
 	return 0;
 }
