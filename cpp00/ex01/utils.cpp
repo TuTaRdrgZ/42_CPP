@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:57:01 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/06/10 12:08:17 by tuta             ###   ########.fr       */
+/*   Updated: 2024/07/25 10:15:34 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void Contact::display_details(void)
 	std::cout << "Nickname: " << this->_nickname << std::endl;
 	std::cout << "Phone number: " << this->_phonenumber << std::endl;
 	std::cout << "Darkest secret: " << this->_darkest_secret << std::endl;
-	std::cout << "---------------------------------------------" << std::endl;
+	// std::cout << "---------------------------------------------" << std::endl;
 }
