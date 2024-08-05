@@ -2,23 +2,35 @@ NAME = Brain
 
 SRCS = main.cpp Dog.cpp Cat.cpp Animal.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 
-INCLUDES = Dog.hpp Cat.hpp Animal.hpp WrongCat.hpp WrongAnimal.hpp Brain.hpp
-
 FLAGS = c++ -Wall -Wextra -Werror -std=c++98
 
-OBJS = $(SRCS:.cpp=.o)
+OBJDIR = objs
+DEPDIR = deps
 
-all = $(NAME)
+OBJS = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
+DEPS = $(patsubst %.cpp,$(DEPDIR)/%.d,$(SRCS))
 
-$(NAME): $(INCLUDES) $(OBJS) Makefile
+all: directories $(NAME)
+
+$(OBJDIR)/%.o: %.cpp
+	$(FLAGS) -MMD -MP -MF $(DEPDIR)/$*.d -I ./ -c $< -o $@
+
+$(NAME): $(OBJS)
 	$(FLAGS) $(OBJS) -o $(NAME)
 
+directories: 
+	@mkdir -p $(OBJDIR)
+	@mkdir -p $(DEPDIR)
+
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(DEPS)
+	rm -rf $(OBJDIR) $(DEPDIR)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY : clean all fclean re
+-include $(DEPS)
+
+.PHONY: clean all fclean re directories

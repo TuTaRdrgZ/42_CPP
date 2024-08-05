@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 12:15:25 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/22 15:50:07 by tuta             ###   ########.fr       */
+/*   Updated: 2024/08/05 12:06:45 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define ANIMAL_HPP
 
 #include <string>
+#include <cstdlib>
 
 class Animal
 {
