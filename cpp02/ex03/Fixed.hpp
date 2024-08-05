@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 18:14:14 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/07/16 18:53:34 by tuta             ###   ########.fr       */
+/*   Updated: 2024/08/05 11:52:19 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ class Fixed
 
 		friend std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 
-        // ----------------- ex02 ----------------- \\
+        // ----------------- ex02 ----------------- 
 
 		// Comparison operators
 		bool operator>(const Fixed& other) const;
