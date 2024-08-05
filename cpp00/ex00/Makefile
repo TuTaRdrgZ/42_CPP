@@ -8,7 +8,7 @@ FLAGS= -Wall -Wextra -Werror -std=c++98
 
 SRCO= $(SRC:.cpp=.o)
 
-%.o: %.cpp
+%.o: %.cpp Makefile
 	$(CXX) $(FLAGS) -c $< -o $@
 
 all: $(NAME)
