@@ -6,13 +6,13 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:24:39 by tuta              #+#    #+#             */
-/*   Updated: 2024/06/10 12:46:34 by tuta             ###   ########.fr       */
+/*   Updated: 2024/10/29 11:41:51 by bautrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
-class Zombie{
+class Zombie {
 
 	private:
 		std::string _name;
