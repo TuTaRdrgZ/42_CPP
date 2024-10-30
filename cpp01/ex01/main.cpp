@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:33:47 by tuta              #+#    #+#             */
-/*   Updated: 2024/10/30 10:54:51 by tuta             ###   ########.fr       */
+/*   Updated: 2024/10/30 11:03:15 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(void)
 {
-	int	N = 1000000000;
+	int	N = 5;
 
 	Zombie *zombie = zombieHorde(N, "asdf");
 	if (zombie == NULL)
