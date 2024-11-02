@@ -1,5 +1,6 @@
 #include "Fixed.hpp"
-#include <iterator>
+
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 
 int main( void )
 {
@@ -64,11 +65,18 @@ int main( void )
 	// Increment/Decrement Operators
 	
 	std::cout << "----------- INCREMENT/DECREMENT OPERATORS -----------" << std::endl;
-	std::cout << a << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
+	a = 10;
+	std::cout << "a = " << a << std::endl;
+	std::cout << "++a = " << ++a << std::endl;
+	std::cout << "a++ = " << a++ << std::endl;
+	std::cout << "a = " << a << std::endl << std::endl;
+
+	std::cout << "a = " << a << std::endl;
+	std::cout << "--a = " << --a << std::endl;
+	std::cout << "a-- = " << a-- << std::endl;
+	std::cout << "a = " << a << std::endl << std::endl;
+
+	
 
 	// min/max functions
 	

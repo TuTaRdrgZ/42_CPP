@@ -1,33 +1,46 @@
 #include "Fixed.hpp"
 
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
+{
+	os << fixed.toFloat();	
+
+	return (os);
+}
+
+// Default constructor
 Fixed::Fixed() : _value(0)
 {
 	// std::cout << "Default Constructor called" << std::endl;
 }
 
+// Copy constructor
 Fixed::Fixed(const Fixed &other)
 {
 	// std::cout << "Copy Constructor called" << std::endl;
 	*this = other;
 }
 
+// Destructor
 Fixed::~Fixed()
 {
 	// std::cout << "Destructor called" << std::endl;
 }
 
+// Constructor with int value
 Fixed::Fixed(const int intValue)
 {
 	// std::cout << "Int constructor called" << std::endl;
 	this->_value = (intValue << this->_fBits);
 }
 
+// Constructor with float value
 Fixed::Fixed(const float floatValue)
 {
 	// std::cout << "Float constructor called" << std::endl;
-	this->_value = (roundf(floatValue * 256));
+	this->_value = (roundf(floatValue * (1 << this->_fBits)));
 }
 
+// Copy Assignment operator
 Fixed &Fixed::operator=(const Fixed &other)
 {
 	// std::cout << "Copy Assignment operator called" << std::endl;
@@ -37,6 +50,7 @@ Fixed &Fixed::operator=(const Fixed &other)
     return *this;
 }
 
+// ---------- Getters and Setters ---------- //
 int Fixed::getRawBits() const
 {
 	// std::cout << "getRawBits function called" << std::endl;
@@ -49,7 +63,9 @@ void Fixed::setRawBits(int const raw)
 	_value = raw;
 }
 
-float Fixed::toFloat() const {
+// ---------- Conversion functions ---------- //
+float Fixed::toFloat() const
+{
     return static_cast<float>(_value) / (1 << _fBits);
 }
 
@@ -118,42 +134,43 @@ Fixed Fixed::operator/(const Fixed& other) const
 
 Fixed Fixed::operator*(Fixed const &other) const
 {
-	Fixed val(*this);
-	long tmp1, tmp2;
-
-	tmp1 = ((long)this->getRawBits());
-	tmp2 = ((long)other.getRawBits());
-	val.setRawBits((tmp1 * tmp2) / (1 << Fixed::_fBits));
-	return (val);
+    Fixed result;
+    long tmp1 = static_cast<long>(_value);
+    long tmp2 = static_cast<long>(other._value);
+    result.setRawBits((tmp1 * tmp2) >> _fBits);
+    return result;
 }
 
 // ---------- Increment/Decrement operators ---------- //
 
-Fixed Fixed::operator++()
+// pre-increment
+Fixed &Fixed::operator++()
 {
-	this->_value++;
+	++this->_value;
 	return(*this);
 }
 
+// post-increment
 Fixed Fixed::operator++(int)
 {
-	Fixed tmp = *this;
+	Fixed tmp(*this);
 
-	long nb = this->getRawBits();
-	nb++;
+	++(*this);
 	return (tmp);
 }
 
-Fixed Fixed::operator--()
+// pre-decrement
+Fixed &Fixed::operator--()
 {
 	this->_value--;
 	return(*this);
 }
 
+// post-decrement
 Fixed Fixed::operator--(int)
 {
-	Fixed tmp = *this;
-	this->_value--;
+	Fixed tmp(*this);
+	--(*this);
 	return (tmp);
 }
 
@@ -177,11 +194,4 @@ Fixed& Fixed::max(Fixed& a, Fixed& b)
 const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
 {
 	return (a > b ? a : b);
-}
-
-std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
-{
-	os << fixed.toFloat();	
-
-	return (os);
 }
