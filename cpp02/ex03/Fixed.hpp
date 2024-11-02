@@ -6,7 +6,7 @@
 /*   By: bautrodr <bautrodr@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 18:14:14 by bautrodr          #+#    #+#             */
-/*   Updated: 2024/08/05 11:52:19 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/02 14:48:04 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ class Fixed
 		float toFloat(void) const;
 		int toInt(void) const;
 
-		friend std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
-
         // ----------------- ex02 ----------------- 
 
 		// Comparison operators
@@ -65,9 +63,9 @@ class Fixed
 		Fixed operator/(const Fixed& other) const;
 
 		// Increment/Decrement operators
-		Fixed operator++(); //pre-increment
+		Fixed &operator++(); //pre-increment
 		Fixed operator++(int); //post-increment
-		Fixed operator--(); //pre-decrement
+		Fixed &operator--(); //pre-decrement
 		Fixed operator--(int); //post-decrement
 		
 		// Overloaded functions
