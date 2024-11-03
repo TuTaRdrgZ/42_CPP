@@ -6,13 +6,14 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 21:29:27 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/18 22:40:26 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/03 11:14:59 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
 
 // Auxiliar function to calculate determinant
+// det=(x1−x3)(y2−y3)−(x2−x3)(y1−y3)
 Fixed determinant(const Point& p1, const Point& p2, const Point& p3)
 {
     return (p1.getX() - p3.getX()) * (p2.getY() - p3.getY()) -

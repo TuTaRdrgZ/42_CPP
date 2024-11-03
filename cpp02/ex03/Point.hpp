@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:26:48 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/17 16:39:23 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/03 11:16:33 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ class Point
 	public:
 		Point();
 		Point(const Point &other);
+		Point(const float xVal, const float yVal);
 		Point(const Fixed &x, const Fixed &y);
 		~Point();
 		Point &operator=(const Point &other);
