@@ -13,7 +13,7 @@ DEPS = $(patsubst %.cpp,$(DEPDIR)/%.d,$(SRCS))
 all: directories $(NAME)
 
 $(OBJDIR)/%.o: %.cpp
-	$(FLAGS) -MMD -MP -MF $(DEPDIR)/$*.d -I ./ -c $< -o $@
+	$(FLAGS) -MMD -MP -MF $(patsubst $(OBJDIR)/%.o,$(DEPDIR)/%.d,$@) -I ./ -c $< -o $@
 
 $(NAME): $(OBJS)
 	$(FLAGS) $(OBJS) -o $(NAME)
