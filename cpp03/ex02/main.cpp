@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:50:32 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/20 14:02:10 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/17 14:43:00 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ int main()
 	ct1.attack(ct2.getName());
 	ct2.takeDamage(ct1.getAttackDamage());
 	ct2.highFivesGuys();
+	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:50:32 by tuta              #+#    #+#             */
-/*   Updated: 2024/11/15 13:12:59 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:17:21 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,6 @@ int main()
 	ct3.setAttackDamage(20);
 	ct3.attack(ct2.getName());
 	ct3.whoAmI();
+	ct3.guardGate();
+	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:05:59 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/20 13:50:29 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/17 14:41:26 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,22 @@ ScavTrap::~ScavTrap()
 	std::cout << "ScavTrap destructor called" << std::endl;
 }
 
-bool ScavTrap::canAttack(ScavTrap scavtrap)
+bool ScavTrap::canAttack() const
 {
-	if (scavtrap.getHitPoints() <= 0 || scavtrap.getEnergyPoints() <= 0)
-	{
-		if (scavtrap.getHitPoints() <= 0)
-			std::cout << scavtrap.getName() << " cant do anything with " << scavtrap.getHitPoints() << " hitPoints!" << std::endl;
-		else
-			std::cout << scavtrap.getName() << " cant do anything with " << scavtrap.getEnergyPoints() << " energyPoints!" << std::endl;
-		return false;
-	}
-	return true;
+    if (this->_hitPoints <= 0 || this->_energyPoints <= 0)
+    {
+        if (this->_hitPoints <= 0)
+            std::cout << this->_name << " can't do anything with " << this->_hitPoints << " hitPoints!" << std::endl;
+        else
+            std::cout << this->_name << " can't do anything with " << this->_energyPoints << " energyPoints!" << std::endl;
+        return false;
+    }
+    return true;
 }
 
 void ScavTrap::attack(std::string const & target)
 {
-	if (canAttack(*this))
+	if (canAttack())
 	{
 		std::cout << "ScavTrap " << _name << " attack " << target << ", causing " << _attackDamage << " points of damage!" << std::endl;
 		_energyPoints--;

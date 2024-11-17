@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:33:15 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/22 12:44:27 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/17 14:40:42 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,27 @@ FragTrap &FragTrap::operator=(const FragTrap &fragtrap)
 	return *this;
 }
 
-bool FragTrap::canAttack(FragTrap fragtrap)
+FragTrap::~FragTrap()
 {
-	if (fragtrap.getHitPoints() <= 0 || fragtrap.getEnergyPoints() <= 0)
-	{
-		if (fragtrap.getHitPoints() <= 0)
-			std::cout << fragtrap.getName() << " cant do anything with " << fragtrap.getHitPoints() << " hitPoints!" << std::endl;
-		else
-			std::cout << fragtrap.getName() << " cant do anything with " << fragtrap.getEnergyPoints() << " energyPoints!" << std::endl;
-		return false;
-	}
-	return true;
+	std::cout << "FragTrap "<< this->_name << " destructor called" << std::endl;
+}
+
+bool FragTrap::canAttack() const
+{
+    if (this->_hitPoints <= 0 || this->_energyPoints <= 0)
+    {
+        if (this->_hitPoints <= 0)
+            std::cout << this->_name << " can't do anything with " << this->_hitPoints << " hitPoints!" << std::endl;
+        else
+            std::cout << this->_name << " can't do anything with " << this->_energyPoints << " energyPoints!" << std::endl;
+        return false;
+    }
+    return true;
 }
 
 void FragTrap::attack(std::string const &target)
 {
-	if (canAttack(*this))
+	if (canAttack())
 	{
 		std::cout << "ScavTrap " << _name << " attack " << target << ", causing " << _attackDamage << " points of damage!" << std::endl;
 		_energyPoints--;
@@ -73,11 +78,6 @@ void FragTrap::attack(std::string const &target)
 			std::cout << "Oh no, " << _name << " has no energy points left!!" << std::endl;
 		}
 	}
-}
-
-FragTrap::~FragTrap()
-{
-	std::cout << "FragTrap "<< this->_name << " destructor called" << std::endl;
 }
 
 void FragTrap::highFivesGuys()
