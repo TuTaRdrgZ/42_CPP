@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:54:16 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/20 13:58:47 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/17 14:37:36 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ class ClapTrap
 		void setAttackDamage(unsigned int amount);
 		void setEnergyPoints(unsigned int amount);
 		void setHitPoints(unsigned int amount);
-		bool canAttack(ClapTrap claptrap);
+		bool canAttack() const;
 };
 
 #endif
