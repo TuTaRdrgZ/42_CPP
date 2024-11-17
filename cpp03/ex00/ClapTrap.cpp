@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:54:24 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/18 20:08:03 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/17 14:34:10 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ ClapTrap::~ClapTrap()
 
 void ClapTrap::attack(std::string const & target)
 {
-	if (canAttack(*this))
+	if (canAttack())
 	{
 		std::cout << "ClapTrap " << _name << " attack " << target << ", causing " << _attackDamage << " points of damage!" << std::endl;
 		_energyPoints--;
@@ -67,7 +67,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (canAttack(*this))
+	if (canAttack())
 	{
 		_hitPoints += amount;
 		std::cout << "ClapTrap " << _name << " be repaired " << amount << " points of damage!" << std::endl;
@@ -80,35 +80,15 @@ void ClapTrap::beRepaired(unsigned int amount)
 	}
 }
 
-int ClapTrap::getHitPoints()
+bool ClapTrap::canAttack() const
 {
-	return _hitPoints;
-}
-
-int ClapTrap::getEnergyPoints()
-{
-	return _energyPoints;
-}
-
-int ClapTrap::getAttackDamage()
-{
-	return _attackDamage;
-}
-
-std::string ClapTrap::getName()
-{
-	return _name;
-}
-
-bool canAttack(ClapTrap claptrap)
-{
-	if (claptrap.getHitPoints() <= 0 || claptrap.getEnergyPoints() <= 0)
-	{
-		if (claptrap.getHitPoints() <= 0)
-			std::cout << claptrap.getName() << " cant do anything with " << claptrap.getHitPoints() << " hitPoints!" << std::endl;
-		else
-			std::cout << claptrap.getName() << " cant do anything with " << claptrap.getEnergyPoints() << " energyPoints!" << std::endl;
-		return false;
-	}
-	return true;
+    if (this->_hitPoints <= 0 || this->_energyPoints <= 0)
+    {
+        if (this->_hitPoints <= 0)
+            std::cout << this->_name << " can't do anything with " << this->_hitPoints << " hitPoints!" << std::endl;
+        else
+            std::cout << this->_name << " can't do anything with " << this->_energyPoints << " energyPoints!" << std::endl;
+        return false;
+    }
+    return true;
 }
