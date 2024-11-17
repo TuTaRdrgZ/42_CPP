@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:57:54 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/20 13:38:54 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/17 14:29:45 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class ScavTrap : public ClapTrap
 
 		// Override attack function
 		void attack(const std::string& target);
-		bool canAttack(ScavTrap scavtrap);
+		bool canAttack() const;
 
 		// New member function
 		void guardGate();
