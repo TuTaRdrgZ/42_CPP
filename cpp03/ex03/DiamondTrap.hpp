@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:32:13 by tuta              #+#    #+#             */
-/*   Updated: 2024/11/15 13:05:58 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/11/17 14:20:03 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class DiamondTrap : public ScavTrap , public FragTrap
 		~DiamondTrap();
 
 		void highFivesGuys(void);
-		bool canAttack(DiamondTrap diamondtrap);
+		bool canAttack() const;
 		void whoAmI();
 		using ScavTrap::attack;
 };

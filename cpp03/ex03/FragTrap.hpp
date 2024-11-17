@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:32:13 by tuta              #+#    #+#             */
-/*   Updated: 2024/11/15 12:44:34 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/11/17 14:26:10 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class FragTrap : virtual public ClapTrap
 
 		void highFivesGuys(void);
 		void attack(const std::string& target);
-		bool canAttack(FragTrap fragtrap);
+		bool canAttack() const;
 };
 
 #endif

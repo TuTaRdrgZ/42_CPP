@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:33:15 by tuta              #+#    #+#             */
-/*   Updated: 2024/11/15 13:12:14 by bautrodr         ###   ########.fr       */
+/*   Updated: 2024/11/17 14:20:06 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,17 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &diamondtrap)
 	return *this;
 }
 
-bool DiamondTrap::canAttack(DiamondTrap diamondtrap)
+bool DiamondTrap::canAttack() const
 {
-	if (diamondtrap.getHitPoints() <= 0 || diamondtrap.getEnergyPoints() <= 0)
-	{
-		if (diamondtrap.getHitPoints() <= 0)
-			std::cout << diamondtrap.getName() << " cant do anything with " << diamondtrap.getHitPoints() << " hitPoints!" << std::endl;
-		else
-			std::cout << diamondtrap.getName() << " cant do anything with " << diamondtrap.getEnergyPoints() << " energyPoints!" << std::endl;
-		return false;
-	}
-	return true;
+    if (this->_hitPoints <= 0 || this->_energyPoints <= 0)
+    {
+        if (this->_hitPoints <= 0)
+            std::cout << this->_name << " can't do anything with " << this->_hitPoints << " hitPoints!" << std::endl;
+        else
+            std::cout << this->_name << " can't do anything with " << this->_energyPoints << " energyPoints!" << std::endl;
+        return false;
+    }
+    return true;
 }
 
 DiamondTrap::~DiamondTrap()
