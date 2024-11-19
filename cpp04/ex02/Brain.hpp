@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:23:48 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/22 15:26:51 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/19 21:50:47 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@
 
 class Brain
 {
-	protected:
+	private:
 		std::string ideas[100];
 	public:
 		Brain();
-		Brain(std::string idea);
 		Brain(const Brain &);
 		Brain &operator=(const Brain &);
 		~Brain();

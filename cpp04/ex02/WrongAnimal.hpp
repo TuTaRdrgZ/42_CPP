@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:41:52 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/22 15:00:16 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/19 22:09:19 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 class WrongAnimal {
 	protected:
 		std::string _type;
-	private:
-		std::string _name;
 	public:
 		// Constructors
 		WrongAnimal();
@@ -29,11 +27,9 @@ class WrongAnimal {
 		WrongAnimal& operator=(const WrongAnimal &);
 		// Destructor
 		virtual ~WrongAnimal();
-		virtual void makeSound() const;
+		void makeSound() const;
 		std::string getType() const;
 		void setType(std::string);
-		std::string getName() const;
-		void setName(std::string);
 };
 
 #endif

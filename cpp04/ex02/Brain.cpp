@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:25:54 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/22 15:30:40 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/19 21:53:05 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 Brain::Brain()
 {
 	std::cout << "Brain constructor called" << std::endl;
-}
-
-Brain::Brain(std::string idea)
-{
-	std::cout << "Brain constructor called" << std::endl;
-	this->ideas[0] = idea;
 }
 
 Brain::Brain(const Brain &copy)

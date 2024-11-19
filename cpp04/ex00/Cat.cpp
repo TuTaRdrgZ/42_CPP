@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 12:57:14 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/22 13:37:09 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/19 21:21:54 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 Cat::Cat() : Animal("Cat")
 {
 	std::cout << "Default Cat Constructor called!" << std::endl;
-	_type = "Cat";
-}
-
-Cat::Cat(std::string name) : Animal(name)
-{
-	std::cout << this->_type << " Cat Constructor called!" << std::endl;
 	_type = "Cat";
 }
 
@@ -37,7 +31,6 @@ Cat &Cat::operator=(Cat const &cat)
 	if (this == &cat)
 		return *this;
 	this->_type = cat._type;
-	this->_name = cat._name;
 	return *this;
 }
 

@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 12:26:08 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/22 14:27:03 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/19 22:09:33 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,6 @@ std::string WrongAnimal::getType() const
 void WrongAnimal::setType(std::string type)
 {
 	this->_type = type;
-}
-
-std::string WrongAnimal::getName() const
-{
-	return this->_name;
-}
-
-void WrongAnimal::setName(std::string name)
-{
-	this->_name = name;
 }
 
 void WrongAnimal::makeSound() const

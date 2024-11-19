@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 12:26:08 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/22 15:05:49 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/19 21:54:42 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,4 @@ std::string Animal::getType() const
 void Animal::setType(std::string type)
 {
 	this->_type = type;
-}
-
-std::string Animal::getName() const
-{
-	return this->_name;
-}
-
-void Animal::setName(std::string name)
-{
-	this->_name = name;
 }

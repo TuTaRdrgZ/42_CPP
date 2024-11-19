@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 12:15:25 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/22 15:04:02 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/19 21:22:28 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ class Animal
 {
 	protected:
 		std::string _type;
-	private:
-		std::string _name;
 	public:
 		// Constructors
 		Animal();
@@ -32,8 +30,6 @@ class Animal
 		virtual void makeSound() const;
 		std::string getType() const;
 		void setType(std::string);
-		std::string getName() const;
-		void setName(std::string);
 };
 
 #endif

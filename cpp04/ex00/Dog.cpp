@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 12:57:01 by tuta              #+#    #+#             */
-/*   Updated: 2024/07/22 13:37:28 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/19 21:22:39 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 Dog::Dog() :Animal("Dog")
 {
 	std::cout << "Default Dog Constructor called!" << std::endl;
-	_type = "Dog";
-}
-
-Dog::Dog(std::string type) : Animal(type)
-{
-	std::cout << this->_type << " Dog Constructor called!" << std::endl;
 	_type = "Dog";
 }
 
@@ -37,7 +31,6 @@ Dog &Dog::operator=(const Dog &dog)
 	if (this == &dog)
 		return *this;
 	this->_type = dog._type;
-	this->_name = dog._name;
 	return *this;
 }
 
