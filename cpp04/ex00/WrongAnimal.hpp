@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:41:52 by tuta              #+#    #+#             */
-/*   Updated: 2024/11/19 21:33:35 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/24 13:20:20 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class WrongAnimal {
 	public:
 		// Constructors
 		WrongAnimal();
-		WrongAnimal(const std::string type);
+		WrongAnimal(const std::string &type);
 		WrongAnimal(const WrongAnimal& );
 		WrongAnimal& operator=(const WrongAnimal &);
 		// Destructor
