@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 12:26:08 by tuta              #+#    #+#             */
-/*   Updated: 2024/11/19 21:54:42 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/24 13:54:34 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Animal::Animal()
 	this->_type = "Animal";
 }
 
-Animal::Animal(std::string type) : _type(type)
+Animal::Animal(const std::string& type) : _type(type)
 {
 	std::cout << this->_type << " Animal Constructor called!" << std::endl;
 }

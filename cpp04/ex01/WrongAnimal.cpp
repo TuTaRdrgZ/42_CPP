@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 12:26:08 by tuta              #+#    #+#             */
-/*   Updated: 2024/11/19 22:09:33 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/24 13:38:26 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ WrongAnimal::WrongAnimal()
 	this->_type = "WrongAnimal";
 }
 
-WrongAnimal::WrongAnimal(std::string type) : _type(type)
+WrongAnimal::WrongAnimal(const std::string& type) : _type(type)
 {
 	std::cout << this->_type << " WrongAnimal Constructor called!" << std::endl;
 }

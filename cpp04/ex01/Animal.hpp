@@ -6,7 +6,7 @@
 /*   By: tuta <bautrodr@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 12:15:25 by tuta              #+#    #+#             */
-/*   Updated: 2024/11/19 21:54:44 by tuta             ###   ########.fr       */
+/*   Updated: 2024/11/24 13:37:35 by tuta             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Animal
 	public:
 		// Constructors
 		Animal();
-		Animal(const std::string type);
+		Animal(const std::string& type);
 		Animal(const Animal& );
 		Animal& operator=(const Animal &);
 		// Destructor
