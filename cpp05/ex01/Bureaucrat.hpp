@@ -1,8 +1,10 @@
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
-#include "Form.hpp"
 #include <string>
+
+class Form;
+
 class Bureaucrat {
 private:
   std::string const _name;

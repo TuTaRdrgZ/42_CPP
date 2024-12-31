@@ -4,8 +4,8 @@
 
 int main(void) {
   try {
-    Bureaucrat bureaucrat("tuta", 11);
-    Form form("formName", 10, 10);
+    Bureaucrat bureaucrat("tuta", 10);
+    Form form("form", 10, 10);
 
     bureaucrat.signForm(form);
 

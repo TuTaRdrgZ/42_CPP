@@ -1,10 +1,11 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 #include <iostream>
 
-Form::Form() : _name("Form"), _signGrade(0), _execGrade(0), _signed(false) {}
+Form::Form() : _name("Form"), _signGrade(), _execGrade(), _signed(false) {}
 Form::~Form() {}
 
-Form::Form(const Form &b) : _execGrade(0), _signGrade(0), _signed(0) {
+Form::Form(const Form &b) : _signGrade(), _execGrade(), _signed(false) {
   *this = b;
 }
 
