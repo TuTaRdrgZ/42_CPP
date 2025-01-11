@@ -3,7 +3,8 @@
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include <iostream>
-#include <map>
+
+typedef AForm *(Intern::*formCreator)(std::string const &) const;
 
 Intern::Intern() {}
 
@@ -16,23 +17,35 @@ Intern &Intern::operator=(const Intern &other) {
 
 Intern::~Intern() {}
 
+AForm *Intern::createShrubberyCreationForm(std::string const &target) const {
+  return new ShrubberyCreationForm(target);
+}
+
+AForm *Intern::createRobotomyRequestForm(std::string const &target) const {
+  return new RobotomyRequestForm(target);
+}
+
+AForm *Intern::createPresidentialPardonForm(std::string const &target) const {
+  return new PresidentialPardonForm(target);
+}
+
 AForm *Intern::makeForm(std::string name, std::string target) const {
   std::string formNames[] = {
-      std::string("shrubbery creation"),
-      std::string("presidential pardon"),
-      std::string("robotomy request"),
+      "shrubbery creation",
+      "presidential pardon",
+      "robotomy request",
   };
 
-  AForm *forms[] = {
-      new ShrubberyCreationForm(target),
-      new PresidentialPardonForm(target),
-      new RobotomyRequestForm(target),
+  formCreator forms[] = {
+      &Intern::createShrubberyCreationForm,
+      &Intern::createPresidentialPardonForm,
+      &Intern::createRobotomyRequestForm,
   };
 
   for (int i = 0; i < 3; i++) {
     if (name == formNames[i]) {
       std::cout << "Intern creates " << name << std::endl;
-      return forms[i];
+      return (this->*forms[i])(target);
     }
   }
   std::cout << "Intern cannot create " << name << std::endl;

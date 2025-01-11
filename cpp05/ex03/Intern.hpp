@@ -9,6 +9,9 @@ public:
   Intern &operator=(const Intern &);
   ~Intern();
   AForm *makeForm(std::string name, std::string target) const;
+  AForm *createShrubberyCreationForm(std::string const &target) const;
+  AForm *createRobotomyRequestForm(std::string const &target) const;
+  AForm *createPresidentialPardonForm(std::string const &target) const;
 };
 
 #endif

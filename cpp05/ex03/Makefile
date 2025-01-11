@@ -2,7 +2,7 @@ NAME = Form
 
 SRCS = main.cpp Intern.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Bureaucrat.cpp AForm.cpp
 
-FLAGS = c++ -Wall -Wextra -Werror -std=c++98 -g
+FLAGS = c++ -Wall -Wextra -Werror -std=c++98
 
 OBJDIR = objs
 DEPDIR = deps
@@ -17,6 +17,9 @@ $(OBJDIR)/%.o: %.cpp
 
 $(NAME): $(OBJS)
 	$(FLAGS) $(OBJS) -o $(NAME)
+
+run: all
+	./$(NAME)
 
 directories: 
 	@mkdir -p $(OBJDIR)
@@ -33,4 +36,4 @@ re: fclean all
 
 -include $(DEPS)
 
-.PHONY: clean all fclean re directories
+.PHONY: clean all fclean re directories run
