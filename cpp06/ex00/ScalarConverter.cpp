@@ -42,12 +42,19 @@ void ScalarConverter::printDouble(double value) {
 
 void ScalarConverter::convert(const std::string &literal) {
   try {
+    if (literal == "nan") {
+      std::cout << "char: impossible" << std::endl;
+      std::cout << "int: impossible" << std::endl;
+      printFloat(NAN);
+      printDouble(NAN);
+      return;
+    }
     if (literal == "-inff" || literal == "+inff" || literal == "nanf" ||
         literal == "-inf" || literal == "+inf" || literal == "nan") {
+      printChar(0); // Not valid for char conversion
+      printInt(0);  // Not valid for int conversion
       printFloat(static_cast<float>(atof(literal.c_str())));
       printDouble(atof(literal.c_str()));
-      printInt(0);  // Not valid for int conversion
-      printChar(0); // Not valid for char conversion
       return;
     }
 
@@ -61,15 +68,15 @@ void ScalarConverter::convert(const std::string &literal) {
     }
 
     double num = atof(literal.c_str());
+    printChar(static_cast<char>(num));
     if (num == floor(num) && num >= INT_MIN && num <= INT_MAX) {
       printInt(static_cast<int>(num));
     } else {
       std::cout << "int: impossible" << std::endl;
     }
-
-    printChar(static_cast<char>(num));
     printFloat(static_cast<float>(num));
     printDouble(num);
+
   } catch (const std::exception &e) {
     std::cout << "Conversion error: " << e.what() << std::endl;
   }
