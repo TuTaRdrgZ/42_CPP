@@ -6,10 +6,12 @@
 
 ScalarConverter::ScalarConverter() {}
 
-ScalarConverter::ScalarConverter(const ScalarConverter &src) { (void)src; }
+ScalarConverter::ScalarConverter(const ScalarConverter &src) { *this = src; }
 
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &rhs) {
-  (void)rhs;
+  if (this != &rhs) {
+    *this = rhs;
+  }
   return *this;
 }
 
