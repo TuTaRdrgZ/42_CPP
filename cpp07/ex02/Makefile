@@ -1,4 +1,4 @@
-NAME = convert
+NAME = Array
 
 SRCS = main.cpp 
 
