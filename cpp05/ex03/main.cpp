@@ -7,6 +7,8 @@ int main(void) {
   {
     AForm *rrf;
     rrf = someRandomIntern.makeForm("shrubbery creation", "Bender");
+    if (!rrf)
+      return 1;
     Bureaucrat tuta("Tuta", 1);
     rrf->beSigned(tuta);
     rrf->execute(tuta);
@@ -15,6 +17,8 @@ int main(void) {
   {
     AForm *rrf;
     rrf = someRandomIntern.makeForm("presidential pardon", "Bender");
+    if (!rrf)
+      return 1;
     Bureaucrat tuta("Tuta", 1);
     rrf->beSigned(tuta);
     rrf->execute(tuta);
@@ -23,6 +27,8 @@ int main(void) {
   {
     AForm *rrf;
     rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+    if (!rrf)
+      return 1;
     Bureaucrat tuta("Tuta", 1);
     rrf->beSigned(tuta);
     rrf->execute(tuta);
