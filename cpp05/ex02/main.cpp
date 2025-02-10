@@ -50,5 +50,23 @@ int main(void) {
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
   }
+  {
+    try {
+      Bureaucrat bureaucrat("tuta", 150);
+
+      std::cout << std::endl
+                << "------------------PresidentialPardonForm with "
+                   "exception------------------"
+                << std::endl
+                << std::endl;
+
+      PresidentialPardonForm presidentialPardonForm("tuta");
+      bureaucrat.signForm(presidentialPardonForm);
+      bureaucrat.executeForm(presidentialPardonForm);
+
+    } catch (std::exception &e) {
+      std::cout << e.what() << std::endl;
+    }
+  }
   return 0;
 }
