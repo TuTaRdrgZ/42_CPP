@@ -54,7 +54,7 @@ void ScalarConverter::convert(const std::string &literal) {
       printChar(0); // Not valid for char conversion
       printInt(0);  // Not valid for int conversion
       printFloat(static_cast<float>(atof(literal.c_str())));
-      printDouble(atof(literal.c_str()));
+      printDouble(static_cast<double>(atof(literal.c_str())));
       return;
     }
 
