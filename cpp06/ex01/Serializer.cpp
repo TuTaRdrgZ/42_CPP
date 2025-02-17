@@ -13,9 +13,10 @@ Serializer &Serializer::operator=(const Serializer &other) {
 
 Serializer::~Serializer() {}
 
-uintptr_t Serializer::serialize(Data *ptr) { return ptr->intData; }
+uintptr_t Serializer::serialize(Data *ptr) {
+  return (reinterpret_cast<uintptr_t>(ptr));
+}
 
 Data *Serializer::deserialize(uintptr_t raw) {
-  Data *data = reinterpret_cast<Data *>(raw);
-  return data;
+  return (reinterpret_cast<Data *>(raw));
 }
