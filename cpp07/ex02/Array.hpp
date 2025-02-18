@@ -28,6 +28,7 @@ public:
 
   ~Array(void) { delete[] _data; }
 
+  // subindex operator
   T &operator[](unsigned int index) {
     if (index >= _size)
       throw std::out_of_range("Index out of range");
