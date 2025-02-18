@@ -9,9 +9,7 @@ ScalarConverter::ScalarConverter() {}
 ScalarConverter::ScalarConverter(const ScalarConverter &src) { *this = src; }
 
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &rhs) {
-  if (this != &rhs) {
-    *this = rhs;
-  }
+  (void)rhs;
   return *this;
 }
 
@@ -68,7 +66,12 @@ void ScalarConverter::convert(const std::string &literal) {
     }
 
     double num = atof(literal.c_str());
-    printChar(static_cast<char>(num));
+
+    if (std::isnan(num) || std::isinf(num)) {
+      std::cout << "char: impossible" << std::endl;
+    } else {
+      printChar(static_cast<char>(num));
+    }
     if (num == floor(num) && num >= INT_MIN && num <= INT_MAX) {
       printInt(static_cast<int>(num));
     } else {
