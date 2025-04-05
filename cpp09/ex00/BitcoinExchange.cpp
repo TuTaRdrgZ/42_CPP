@@ -16,8 +16,8 @@ BitcoinExchange::BitcoinExchange(const char *filename) {
     std::istringstream iss(line);
     std::string date, rateStr;
     if (std::getline(iss, date, ',') && std::getline(iss, rateStr)) {
-      date = trim(date);
-      rateStr = trim(rateStr);
+      date = Trim(date);
+      rateStr = Trim(rateStr);
       double rate = std::atof(rateStr.c_str());
       db_[date] = rate;
     }
@@ -78,8 +78,8 @@ bool BitcoinExchange::ProcessLine(const std::string &line) {
     std::cout << "Error: bad input => " << line << std::endl;
     return false;
   }
-  std::string date = trim(line.substr(0, pos));
-  std::string valueStr = trim(line.substr(pos + 1));
+  std::string date = Trim(line.substr(0, pos));
+  std::string valueStr = Trim(line.substr(pos + 1));
 
   if (!isValidDate(date)) {
     std::cout << "Error: bad input => " << line << std::endl;
@@ -118,7 +118,7 @@ bool BitcoinExchange::ProcessLine(const std::string &line) {
   return true;
 }
 
-std::string BitcoinExchange::trim(const std::string &s) {
+std::string BitcoinExchange::Trim(const std::string &s) {
   size_t start = s.find_first_not_of(" \t");
   if (start == std::string::npos)
     return "";

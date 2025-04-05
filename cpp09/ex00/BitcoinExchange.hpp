@@ -22,7 +22,7 @@ public:
   ~BitcoinExchange();
   bool isValidDate(const std::string &date) const;
   bool ProcessLine(const std::string &line);
-  std::string trim(const std::string &s);
+  std::string Trim(const std::string &s);
 };
 
 #endif // BITCOINEXCHANGE_HPP

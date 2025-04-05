@@ -1,12 +1,18 @@
 #include <algorithm>
-#include <cctype>
-#include <cstdlib>
 #include <ctime>
 #include <deque>
 #include <iostream>
 #include <iterator>
 #include <string>
 #include <vector>
+
+// Prints the container elements separated by spaces.
+template <typename Container> void printContainer(const Container &data) {
+  typedef typename Container::const_iterator ConstIter;
+  for (ConstIter it = data.begin(); it != data.end(); ++it)
+    std::cout << *it << " ";
+  std::cout << std::endl;
+}
 
 // Helper: Computes the modified Jacobsthal number.
 // modJac(1)=1, modJac(2)=3, and for r>=3: modJac(r) = modJac(r-1) + 2 *
@@ -114,14 +120,6 @@ template <typename Container> void checkSorted(const Container &data) {
   }
 }
 
-// Prints the container elements separated by spaces.
-template <typename Container> void printContainer(const Container &data) {
-  typedef typename Container::const_iterator ConstIter;
-  for (ConstIter it = data.begin(); it != data.end(); ++it)
-    std::cout << *it << " ";
-  std::cout << std::endl;
-}
-
 // Utility: Constructs a vector<int> from command-line arguments.
 // Each argument must consist solely of digits.
 std::vector<int> fetchIntVector(char **args) {
@@ -142,9 +140,6 @@ std::vector<int> fetchIntVector(char **args) {
   return result;
 }
 
-/////////////////////
-// main entry point
-/////////////////////
 int main(int argc, char **argv) {
   if (argc < 2) {
     std::cerr << "Error" << std::endl;
@@ -153,7 +148,6 @@ int main(int argc, char **argv) {
 
   // Build a vector of integers from command-line arguments.
   std::vector<int> vec = fetchIntVector(++argv);
-  // Also create a deque from the vector.
   std::deque<int> deq(vec.begin(), vec.end());
 
   std::cout << "Before sorting:" << std::endl;
@@ -186,4 +180,3 @@ int main(int argc, char **argv) {
 
   return 0;
 }
-
