@@ -6,10 +6,11 @@
 #include <string>
 #include <vector>
 
-static int nbr_of_comps = 0;
+//static int nbr_of_comps = 0;
 
+// Count the number of comparisons
 template <typename T> bool comp(T lv, T rv) {
-    nbr_of_comps++;
+  //  nbr_of_comps++;
     return *lv < *rv;
 }
 
@@ -131,6 +132,26 @@ std::vector<int> fetchIntVector(char **args) {
     return result;
 }
 
+// Function to run the sort N times and calculate the average time
+template <typename Container>
+double RunAndCheckAverageTime(Container &container, int repetitions) {
+    double totalTime = 0.0;
+	
+    for (int i = 0; i < repetitions; ++i) {
+        Container tempContainer = container;
+        clock_t start = clock();
+        FordJohnsonSort(tempContainer.begin(), tempContainer.end());
+        clock_t end = clock();
+        totalTime += (static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000);
+        checkSorted(tempContainer);
+    }
+	
+	FordJohnsonSort(container.begin(), container.end());
+	checkSorted(container);
+
+    return totalTime / repetitions;
+}
+
 int main(int argc, char **argv) {
     if (argc < 2) {
         std::cerr << "Error" << std::endl;
@@ -140,36 +161,22 @@ int main(int argc, char **argv) {
     std::vector<int> vec = fetchIntVector(++argv);
     std::deque<int> deq(vec.begin(), vec.end());
 
+    int repetitions = 1000; // Number of times to repeat the sort
     std::cout << "Before sorting:" << std::endl;
     printContainer(vec);
 
-    clock_t start, end;
-    double timeVector, timeDeque;
-
-    start = clock();
-    FordJohnsonSort(vec.begin(), vec.end());
-    end = clock();
-    timeVector = (static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000);
-
-    start = clock();
-    FordJohnsonSort(deq.begin(), deq.end());
-    end = clock();
-    timeDeque = (static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000);
+    double avgTimeVector = RunAndCheckAverageTime(vec, repetitions);
+    double avgTimeDeque = RunAndCheckAverageTime(deq, repetitions);
 
     std::cout << "After sorting:" << std::endl;
     printContainer(vec);
 
-    checkSorted(vec);
-    checkSorted(deq);
-
-    std::cout << "Time to process " << vec.size()
-              << " elements with std::vector: " << timeVector << " ms"
-              << std::endl;
-    std::cout << "Time to process " << deq.size()
-              << " elements with std::deque: " << timeDeque << " ms"
-              << std::endl;
-
-    std::cout << "Number of comparisons: " << nbr_of_comps << std::endl;
+    std::cout << "Average time to process " << vec.size()
+              << " elements with std::vector: " << avgTimeVector << " ms"
+              << " (over " << repetitions << " runs)" << std::endl;
+    std::cout << "Average time to process " << deq.size()
+              << " elements with std::deque: " << avgTimeDeque << " ms"
+              << " (over " << repetitions << " runs)" << std::endl;
 
     return 0;
 }
