@@ -7,17 +7,16 @@
 #include <vector>
 #include <cstdlib>
 
-// Contador de comparaciones
+// N of comparisons
 static int nbr_of_comps = 0;
 
-// Comparador que cuenta comparaciones
 template <typename T>
 bool comp(const T& lv, const T& rv) {
     ++nbr_of_comps;
     return lv < rv;
 }
 
-// Imprimir contenedor
+// Print container
 template <typename Container>
 void printContainer(const Container& data) {
     for (typename Container::const_iterator it = data.begin(); it != data.end(); ++it)
@@ -25,7 +24,7 @@ void printContainer(const Container& data) {
     std::cout << std::endl;
 }
 
-// Secuencia de Jacobsthal
+// Jacobsthal sequence
 int modJac(int r) {
     if (r == 1) return 1;
     if (r == 2) return 3;
@@ -38,7 +37,7 @@ int modJac(int r) {
     return b;
 }
 
-// Generar orden de insercion segun Jacobsthal
+// Generate insertion order using Jacobsthal sequence
 std::vector<size_t> generateInsertionOrder(size_t size) {
     std::vector<size_t> order;
     std::vector<size_t> used;
@@ -57,21 +56,7 @@ std::vector<size_t> generateInsertionOrder(size_t size) {
     return order;
 }
 
-// Insercion binaria guiada por etiquetas
-template <typename T>
-size_t binarySearchInsert(const std::vector<T>& sorted, const T& value) {
-    size_t left = 0, right = sorted.size();
-    while (left < right) {
-        size_t mid = left + (right - left) / 2;
-        if (comp(value, sorted[mid]))
-            right = mid;
-        else
-            left = mid + 1;
-    }
-    return left;
-}
-
-// Implementacion clasica del Ford-Johnson
+// Main sorting function
 template <typename Iterator>
 void FordJohnsonSort(Iterator begin, Iterator end) {
     typedef typename std::iterator_traits<Iterator>::value_type T;
@@ -88,43 +73,56 @@ void FordJohnsonSort(Iterator begin, Iterator end) {
 
     std::vector<T> winners;
     std::vector<T> losers;
+    std::vector<T> pairWinner;
 
     for (Iterator it = begin; it != end; it += 2) {
         T a = *it;
         T b = *(it + 1);
         if (comp(a, b)) std::swap(a, b);
-        winners.push_back(a); // ganador
-        losers.push_back(b);  // perdedor
+        winners.push_back(a);
+        losers.push_back(b);
+        pairWinner.push_back(a);
     }
 
     FordJohnsonSort(winners.begin(), winners.end());
 
-    std::vector<size_t> insertionOrder = generateInsertionOrder(losers.size());
-    for (size_t i = 0; i < insertionOrder.size(); ++i) {
-        size_t idx = insertionOrder[i];
-        T value = losers[idx];
-        size_t pos = binarySearchInsert(winners, value);
-        winners.insert(winners.begin() + pos, value);
+	// Insert losers using jacobsthal numbers
+    std::vector<size_t> order = generateInsertionOrder(losers.size());
+    for (size_t k = 0; k < order.size(); ++k) {
+        size_t i = order[k];
+        T val = losers[i];
+		// find winner position respect to pairWinner
+        typename std::vector<T>::iterator itWin = std::find(winners.begin(), winners.end(), pairWinner[i]);
+        size_t hi = std::distance(winners.begin(), itWin);
+		// binary search to find the position of val
+        typename std::vector<T>::iterator pos = std::lower_bound(
+            winners.begin(), winners.begin() + hi, val, comp<T>);
+        winners.insert(pos, val);
     }
 
+	// Insert stray numbers
     if (hasStray) {
-        size_t pos = binarySearchInsert(winners, stray);
-        winners.insert(winners.begin() + pos, stray);
+        typename std::vector<T>::iterator strayPos = std::lower_bound(
+            winners.begin(), winners.end(), stray, comp<T>
+        );
+        winners.insert(strayPos, stray);
     }
 
+	// copy sorted winners back to the original container
     std::copy(winners.begin(), winners.end(), begin);
 }
 
-// Verificacion de orden
+// Check if the container is sorted
 template <typename Container>
 void checkSorted(const Container& data) {
     for (typename Container::const_iterator it = data.begin(); it + 1 != data.end(); ++it) {
         if (*(it + 1) < *it) {
-			throw std::runtime_error("Sequence is NOT sorted!");
+            throw std::runtime_error("Sequence is NOT sorted!");
         }
     }
 }
 
+// Generate a vector of integers from command line arguments
 std::vector<int> fetchIntVector(char** args) {
     std::vector<int> result;
     if (!args || !*args) {
@@ -143,56 +141,43 @@ std::vector<int> fetchIntVector(char** args) {
     return result;
 }
 
-// Function to run the sort N times and calculate the average time
+// Execute the sorting and check the average time
 template <typename Container>
-double RunAndCheckAverageTime(Container &container, int repetitions) {
+double RunAndCheckAverageTime(Container& container, int repetitions) {
     double totalTime = 0.0;
-	
     for (int i = 0; i < repetitions; ++i) {
-        Container tempContainer = container;
+        Container temp = container;
         clock_t start = clock();
-        FordJohnsonSort(tempContainer.begin(), tempContainer.end());
+        FordJohnsonSort(temp.begin(), temp.end());
         clock_t end = clock();
         totalTime += (static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000);
-        checkSorted(tempContainer);
+        checkSorted(temp);
     }
-	
-	FordJohnsonSort(container.begin(), container.end());
-	checkSorted(container);
-
+    FordJohnsonSort(container.begin(), container.end());
+    checkSorted(container);
     return totalTime / repetitions;
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
     if (argc < 2) {
         std::cerr << "Error" << std::endl;
         return 1;
     }
-
     std::vector<int> vec = fetchIntVector(++argv);
     std::deque<int> deq(vec.begin(), vec.end());
-
-	try {
-	  int repetitions = 1000; // Number of times to repeat the sort
-	  std::cout << "Before sorting:" << std::endl;
-	  printContainer(vec);
-	  double avgTimeVector = RunAndCheckAverageTime(vec, repetitions);
-	  double avgTimeDeque = RunAndCheckAverageTime(deq, repetitions);
-
-	  std::cout << "After sorting:" << std::endl;
-	  printContainer(vec);
-
-	  std::cout << "Average time to process " << vec.size()
-		<< " elements with std::vector: " << avgTimeVector << " ms"
-		<< " (over " << repetitions << " runs)" << std::endl;
-	  std::cout << "Average time to process " << deq.size()
-		<< " elements with std::deque: " << avgTimeDeque << " ms"
-		<< " (over " << repetitions << " runs)" << std::endl;
-	  std::cout << "Number of comparisons: " << nbr_of_comps / repetitions << std::endl;
-	} catch (std::exception &e) {
-	  std::cout << e.what() << std::endl;
-	}
-
-
+    int reps = 1000;
+    try {
+        std::cout << "Before sorting:" << std::endl;
+        printContainer(vec);
+        double tv = RunAndCheckAverageTime(vec, reps);
+        double td = RunAndCheckAverageTime(deq, reps);
+        std::cout << "After sorting:" << std::endl;
+        printContainer(vec);
+        std::cout << "Avg time (vector): " << tv << " ms over " << reps << " runs" << std::endl;
+        std::cout << "Avg time (deque): " << td << " ms over " << reps << " runs" << std::endl;
+        std::cout << "Comparisons: " << nbr_of_comps / reps << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << e.what() << std::endl;
+    }
     return 0;
 }
