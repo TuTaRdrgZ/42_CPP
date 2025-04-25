@@ -1,6 +1,6 @@
 NAME = PmergeMe
 
-SRCS = PmergeMe.cpp
+SRCS = main.cpp PmergeMe.cpp Comparator.cpp
 
 FLAGS = c++ -Wall -Wextra -Werror -std=c++98
 
