@@ -7,6 +7,6 @@ int main(int argc, char **argv) {
   }
   argv++;
   PmergeMe FordJohnson(argv);
-  FordJohnson.Sort();
+  FordJohnson.Run();
   return 0;
 }

@@ -4,32 +4,25 @@
 #include <ctime>
 #include <string>
 
-// Constructor
-PmergeMe::PmergeMe(char **args) {
-  std::vector<int> vec = ParseInput(args);
-  vector_ = vec;
-  deque_.assign(vec.begin(), vec.end());
-  comp_.reset();
-}
+// Constructor from input arguments
+PmergeMe::PmergeMe(char **args) : vector_(), deque_() { ParseInput(args); }
 
 PmergeMe::PmergeMe(const PmergeMe &src) {
   if (this != &src) {
     vector_ = src.vector_;
     deque_ = src.deque_;
-    comp_.count = src.comp_.count;
   }
 }
 PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
   if (this != &other) {
     vector_ = other.vector_;
     deque_ = other.deque_;
-    comp_.count = other.comp_.count;
   }
   return *this;
 }
 PmergeMe::~PmergeMe() {}
 
-// Prints the container elements separated by spaces.
+// Prints all elements in the container separated by spaces.
 template <typename Container>
 void PmergeMe::PrintContainer(const Container &data) const {
   for (typename Container::const_iterator it = data.begin(); it != data.end();
@@ -38,85 +31,7 @@ void PmergeMe::PrintContainer(const Container &data) const {
   std::cout << "\n";
 }
 
-// Calculate the Jacobsthal number
-size_t PmergeMe::ModJac(size_t r) {
-  if (r == 1)
-    return 1;
-  if (r == 2)
-    return 3;
-  size_t a = 1, b = 3;
-  for (size_t i = 3; i <= r; ++i) {
-    size_t c = b + 2 * a;
-    a = b;
-    b = c;
-  }
-  return b;
-}
-
-// Recursive implementation of Ford-Johnson (Merge-Insertion) with explicit
-// comparison counting
-template <typename Iterator>
-void PmergeMe::FordJohnsonSort(Iterator begin, Iterator end, Comparator &comp) {
-  typedef typename std::iterator_traits<Iterator>::value_type T;
-
-  size_t n = std::distance(begin, end);
-  if (n <= 1)
-    return;
-
-  bool hasStray = n % 2 != 0;
-  T stray;
-  if (hasStray) {
-    stray = *(end - 1);
-    --end;
-    n--;
-  }
-
-  // Winners and losers
-  std::vector<Iterator> winners;
-  std::vector<T> losers;
-  for (Iterator it = begin; it != end; it += 2) {
-    Iterator first = it;
-    Iterator second = it + 1;
-    if (comp(*second, *first))
-      std::iter_swap(first, second); // first = max, second = min
-    winners.push_back(first);        // winner
-    losers.push_back(*second);       // loser
-  }
-
-  // Recursively sort winners
-  std::vector<T> sortedWinners;
-  for (size_t i = 0; i < winners.size(); ++i)
-    sortedWinners.push_back(*winners[i]);
-  FordJohnsonSort(sortedWinners.begin(), sortedWinners.end(), comp);
-
-  // Insertion of losers using Jacobsthal sequence
-  int r_max = 1;
-  while (ModJac(r_max + 1) <= losers.size())
-    ++r_max;
-  size_t threshold = ModJac(r_max);
-  std::vector<size_t> insertionOrder;
-  for (size_t i = threshold; i >= 1; --i)
-    insertionOrder.push_back(i - 1);
-  for (size_t i = threshold; i < losers.size(); ++i)
-    insertionOrder.push_back(i);
-
-  for (std::vector<size_t>::iterator idx = insertionOrder.begin();
-       idx != insertionOrder.end(); ++idx) {
-    T value = losers[*idx];
-    // Binary search with custom comparator
-    typename std::vector<T>::iterator pos = std::lower_bound(
-        sortedWinners.begin(), sortedWinners.end(), value, comp);
-    sortedWinners.insert(pos, value);
-  }
-  // Insert stray
-  if (hasStray) {
-    typename std::vector<T>::iterator pos = std::lower_bound(
-        sortedWinners.begin(), sortedWinners.end(), stray, comp);
-    sortedWinners.insert(pos, stray);
-  }
-  std::copy(sortedWinners.begin(), sortedWinners.end(), begin);
-}
-
+// Checks if the container is sorted in ascending order.
 template <typename Container>
 void PmergeMe::CheckSorted(const Container &data) const {
   typename Container::const_iterator next;
@@ -131,83 +46,217 @@ void PmergeMe::CheckSorted(const Container &data) const {
   }
 }
 
-std::vector<int> PmergeMe::ParseInput(char **args) const {
-  std::vector<int> result;
+// Parses input arguments into a vector of ints.
+void PmergeMe::ParseInput(char **args) {
   if (!args || !*args) {
-    std::cerr << "Error ParseInput" << std::endl;
+    std::cerr << "Error" << std::endl;
     std::exit(1);
   }
   while (*args) {
     std::string token(*args);
     if (token.find_first_not_of("0123456789") != std::string::npos) {
-      std::cerr << "Error: Invalid char" << std::endl;
+      std::cerr << "Error" << std::endl;
       std::exit(1);
     }
-    result.push_back(std::atoi(*args));
+    deque_.push_back(std::atoi(token.c_str()));
+    vector_.push_back(std::atoi(token.c_str()));
     ++args;
+  }
+}
+
+// Calculates the n-th Jacobsthal number.
+int PmergeMe::Jacobsthal(int n) {
+  if (n == 1)
+    return 1;
+  if (n == 2)
+    return 3;
+  int a = 1, b = 3;
+  for (int i = 3; i <= n; ++i) {
+    int c = b + 2 * a;
+    a = b;
+    b = c;
+  }
+  return b;
+}
+
+// Returns the Jacobsthal insertion order for a given length.
+template <typename Container>
+Container PmergeMe::JacobsthalInsertionOrder(size_t length) {
+  Container result;
+  int index = 3;
+  while (length > 1 && static_cast<size_t>(Jacobsthal(index)) < length - 1) {
+    result.push_back(Jacobsthal(index));
+    ++index;
   }
   return result;
 }
 
-// Function to run the sort N times and calculate the average time and
-// comparisons
+// Creates pairs from the input container. Handles stray element if present.
 template <typename Container>
-double PmergeMe::RunAndCheckAverageTime(Container &container, int repetitions,
-                                        size_t &avg_comp) {
-  double totalTime = 0.0;
-  size_t totalComp = 0;
-
-  for (int i = 0; i < repetitions; ++i) {
-    Container tempContainer = container;
-    comp_.reset();
-    clock_t start = clock();
-    FordJohnsonSort(tempContainer.begin(), tempContainer.end(), comp_);
-    clock_t end = clock();
-    totalTime += (static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000);
-    totalComp += comp_.count;
-    CheckSorted(tempContainer);
+PairVec PmergeMe::CreatePairs(const Container &a, int &stray, bool &has_stray) {
+  PairVec split_array;
+  typename Container::const_iterator it = a.begin();
+  while (it != a.end()) {
+    if (std::distance(it, a.end()) == 1) {
+      has_stray = true;
+      stray = *it;
+      ++it;
+    } else {
+      int first = *it;
+      ++it;
+      int second = *it;
+      ++it;
+      split_array.push_back(std::make_pair(first, second));
+    }
   }
-
-  // Final actual sort to main container
-  comp_.reset();
-  FordJohnsonSort(container.begin(), container.end(), comp_);
-  CheckSorted(container);
-
-  avg_comp = totalComp / repetitions;
-  return totalTime / repetitions;
+  return split_array;
 }
 
-void PmergeMe::Sort() {
-  int repetitions = 1000;
+// Sorts each pair so that first <= second
+void PmergeMe::SortEachPair(PairVec &split_array) {
+  for (size_t i = 0; i < split_array.size(); ++i) {
+    if ((split_array[i].second < split_array[i].first)) {
+      std::swap(split_array[i].first, split_array[i].second);
+    }
+  }
+}
+
+// Inserts an element into a sorted vector of pairs by the second value
+void PmergeMe::Insert(IntPair element, PairVec &A, int n) {
+  size_t insert_pos = 0;
+  while ((int)insert_pos <= n && element.second >= A[insert_pos].second) {
+    ++insert_pos;
+  }
+  A.insert(A.begin() + insert_pos, element);
+}
+
+// Sorts the vector of pairs by the second element using insertion sort
+void PmergeMe::InsertionSortPairs(PairVec &A, int n) {
+  if (n < 1)
+    return;
+
+  InsertionSortPairs(A, n - 1);
+  IntPair current = A[n];
+  A.erase(A.begin() + n);
+  Insert(current, A, n - 1);
+}
+
+// Binary search
+template <typename Iterator, typename T>
+Iterator PmergeMe::BinarySearch(Iterator begin, Iterator end, const T &value) {
+  while (begin < end) {
+    Iterator mid = begin + (end - begin) / 2;
+    if ((*mid < value))
+      begin = mid + 1;
+    else
+      end = mid;
+  }
+  return begin;
+}
+
+// Ford-Johnson Sort
+template <typename Container> void PmergeMe::Sort(Container &c) {
+  if (c.size() <= 1)
+    return;
+
+  int stray = -1;
+  bool has_stray = false;
+
+  PairVec pairs = CreatePairs(c, stray, has_stray);
+
+  SortEachPair(pairs);
+
+  Container winners; // List of winners (second elements of pairs)
+  for (typename PairVec::iterator it = pairs.begin(); it != pairs.end(); ++it) {
+    winners.push_back(it->second);
+  }
+
+  Sort(winners); // Recursively sort the winners
+
+  Container losers; // List of losers (first elements of pairs)
+  for (typename PairVec::iterator it = pairs.begin(); it != pairs.end(); ++it) {
+    losers.push_back(it->first);
+  }
+
+  Container jacobsthal_order = JacobsthalInsertionOrder<Container>(
+      losers.size()); // Get Jacobsthal order
+
+  // Insert the losers into the winners in Jacobsthal order
+  std::vector<bool> inserted(losers.size(),
+                             false); // Tracking inserted elements
+  for (typename Container::iterator it = jacobsthal_order.begin();
+       it != jacobsthal_order.end(); ++it) {
+    if (static_cast<size_t>(*it) < losers.size() && !inserted[*it]) {
+      typename Container::iterator pos =
+          BinarySearch(winners.begin(), winners.end(), losers[*it]);
+      winners.insert(pos, losers[*it]);
+      inserted[*it] = true;
+    }
+  }
+
+  // Insert the remaining losers in sorted order
+  for (size_t i = 0; i < losers.size(); ++i) {
+    if (!inserted[i]) {
+      typename Container::iterator pos =
+          BinarySearch(winners.begin(), winners.end(), losers[i]);
+      winners.insert(pos, losers[i]);
+    }
+  }
+
+  // Insert the stray element if it exists
+  if (has_stray) {
+    typename Container::iterator pos =
+        BinarySearch(winners.begin(), winners.end(), stray);
+    winners.insert(pos, stray);
+  }
+
+  // Copy the sorted winners back to the original container
+  std::copy(winners.begin(), winners.end(), c.begin());
+}
+
+// Run the sorting algorithm and measure time
+void PmergeMe::Run() {
+
+  size_t vec_og_size = vector_.size();
+  size_t deq_og_size = deque_.size();
+
   std::cout << "Before sorting:\n";
   PrintContainer(vector_);
-  size_t avgCompVec = 0;
-  size_t avgCompDeq = 0;
 
-  double avgTimeVector =
-      RunAndCheckAverageTime(vector_, repetitions, avgCompVec);
-  double avgTimeDeque = RunAndCheckAverageTime(deque_, repetitions, avgCompDeq);
+  clock_t start = clock();
+  Sort(vector_);
+  clock_t end = clock();
+  CheckSorted(vector_);
+  double vec_time = (static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000);
+
+  start = clock();
+  Sort(deque_);
+  end = clock();
+  CheckSorted(deque_);
+  double deq_time = (static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000);
+
+  if (vec_og_size != vector_.size() || deq_og_size != deque_.size()) {
+    std::cerr << "Error: Container size changed during sorting.\n";
+    std::exit(1);
+  }
 
   std::cout << "After sorting:\n";
   PrintContainer(vector_);
 
-  std::cout << "Average time to process " << vector_.size()
-            << " elements with std::vector: " << avgTimeVector << " ms"
-            << " (over " << repetitions << " runs)\n";
-  std::cout << "Average comparisons vector: " << avgCompVec << "\n";
-  std::cout << "Average time to process " << deque_.size()
-            << " elements with std::deque: " << avgTimeDeque << " ms"
-            << " (over " << repetitions << " runs)\n";
-  std::cout << "Average comparisons deque: " << avgCompDeq << "\n";
+  std::cout << "Time to process " << vector_.size()
+            << " elements with std::vector: " << vec_time << " ms\n";
+  std::cout << "Time to process " << deque_.size()
+            << " elements with std::deque: " << deq_time << " ms\n";
 }
 
-// Explicit instantiations (for templates in .cpp)
+// Explicit template instantiation
 template void PmergeMe::PrintContainer(const std::vector<int> &) const;
 template void PmergeMe::PrintContainer(const std::deque<int> &) const;
 template void PmergeMe::CheckSorted(const std::vector<int> &) const;
 template void PmergeMe::CheckSorted(const std::deque<int> &) const;
-
-template double PmergeMe::RunAndCheckAverageTime(std::vector<int> &, int,
-                                                 size_t &);
-template double PmergeMe::RunAndCheckAverageTime(std::deque<int> &, int,
-                                                 size_t &);
+template PairVec PmergeMe::CreatePairs(const std::vector<int> &, int &, bool &);
+template PairVec PmergeMe::CreatePairs(const std::deque<int> &, int &, bool &);
+template void PmergeMe::Sort(std::vector<int> &);
+template void PmergeMe::Sort(std::deque<int> &);
+template std::vector<int> PmergeMe::JacobsthalInsertionOrder(size_t);
+template std::deque<int> PmergeMe::JacobsthalInsertionOrder(size_t);

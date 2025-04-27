@@ -1,6 +1,6 @@
 NAME = PmergeMe
 
-SRCS = main.cpp PmergeMe.cpp Comparator.cpp
+SRCS = main.cpp PmergeMe.cpp
 
 FLAGS = c++ -Wall -Wextra -Werror -std=c++98
 
@@ -19,7 +19,7 @@ $(NAME): $(OBJS)
 	$(FLAGS) $(OBJS) -o $(NAME)
 
 run: all
-	./$(NAME)
+	./$(NAME) `shuf -i 1-100000 -n 3000 | tr "\n" " "`
 
 directories: 
 	@mkdir -p $(OBJDIR)
