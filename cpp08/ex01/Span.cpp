@@ -26,7 +26,6 @@ void Span::addNumber(int num) {
   _numbers.push_back(num);
 }
 
-// Calcular el menor intervalo entre numeros
 int Span::shortestSpan() {
   if (_numbers.size() < 2)
     throw std::logic_error("Not enough numbers to calculate span.");
@@ -43,7 +42,6 @@ int Span::shortestSpan() {
   return minSpan;
 }
 
-// Calcular el mayor intervalo entre numeros
 int Span::longestSpan() {
   if (_numbers.size() < 2)
     throw std::logic_error("Not enough numbers to calculate span.");
