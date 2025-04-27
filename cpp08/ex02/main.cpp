@@ -36,6 +36,7 @@ int main(void) {
   std::cout << "MutantStack copy:" << std::endl;
   for (MutantStack<int>::iterator it = mstackCopy.begin();
        it != mstackCopy.end(); ++it) {
+    mstackCopy.pop();
     std::cout << *it << std::endl;
   }
 
