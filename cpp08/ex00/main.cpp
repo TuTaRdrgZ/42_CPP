@@ -1,6 +1,8 @@
 #include "easyfind.hpp"
-#include <bits/stdc++.h>
+#include <deque>
 #include <iostream>
+#include <list>
+#include <vector>
 
 int main() {
   std::vector<int> v;
