@@ -19,7 +19,7 @@ $(NAME): $(OBJS)
 	$(FLAGS) $(OBJS) -o $(NAME)
 
 run: all
-	./$(NAME)
+	./$(NAME) "8 9 * 9 - 9 - 9 - 4 - 1 +"
 
 directories: 
 	@mkdir -p $(OBJDIR)

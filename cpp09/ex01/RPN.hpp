@@ -8,9 +8,9 @@
 class RPN {
 public:
   static void run(std::string expression);
-  ~RPN();
 
 private:
+  ~RPN();
   RPN();
   RPN(const RPN &);
   RPN &operator=(const RPN &);
