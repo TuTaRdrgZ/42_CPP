@@ -20,13 +20,13 @@ int main(void) {
   mstack.push(2);
   mstack.push(10);
 
-  std::cout << "MutantStack (iteradores):" << std::endl;
+  std::cout << "MutantStack iterator:" << std::endl;
   for (MutantStack<int>::iterator it = mstack.begin(); it != mstack.end();
        ++it) {
     std::cout << *it << std::endl;
   }
 
-  std::cout << "MutantStack (reverse iteradores):" << std::endl;
+  std::cout << "MutantStack reverse iterator:" << std::endl;
   for (MutantStack<int>::reverse_iterator rit = mstack.rbegin();
        rit != mstack.rend(); ++rit) {
     std::cout << *rit << std::endl;
