@@ -19,7 +19,7 @@ $(NAME): $(OBJS)
 	$(FLAGS) $(OBJS) -o $(NAME)
 
 run: all
-	./$(NAME)
+	./$(NAME) test.txt
 
 directories: 
 	@mkdir -p $(OBJDIR)

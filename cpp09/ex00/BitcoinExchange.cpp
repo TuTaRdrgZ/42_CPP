@@ -66,7 +66,7 @@ bool BitcoinExchange::isValidDate(const std::string &date) const {
 
   if (mon < 1 || mon > 12)
     return false;
-  if (d < 1 || d > 31) // simplified: not checking month-specific days
+  if (d < 1 || d > 31)
     return false;
 
   return true;
