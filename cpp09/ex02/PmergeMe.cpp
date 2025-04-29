@@ -64,7 +64,7 @@ void PmergeMe::ParseInput(char **args) {
   }
 }
 
-// Calculates the n-th Jacobsthal number.
+// Calculates the n-th Jacobsthal number. J(n)=J(n−1)+2⋅J(n−2) = 1 3 5 11 21 43 85 171...
 int PmergeMe::Jacobsthal(int n) {
   if (n == 1)
     return 1;
@@ -121,26 +121,6 @@ void PmergeMe::SortEachPair(PairVec &split_array) {
   }
 }
 
-// Inserts an element into a sorted vector of pairs by the second value
-void PmergeMe::Insert(IntPair element, PairVec &A, int n) {
-  size_t insert_pos = 0;
-  while ((int)insert_pos <= n && element.second >= A[insert_pos].second) {
-    ++insert_pos;
-  }
-  A.insert(A.begin() + insert_pos, element);
-}
-
-// Sorts the vector of pairs by the second element using insertion sort
-void PmergeMe::InsertionSortPairs(PairVec &A, int n) {
-  if (n < 1)
-    return;
-
-  InsertionSortPairs(A, n - 1);
-  IntPair current = A[n];
-  A.erase(A.begin() + n);
-  Insert(current, A, n - 1);
-}
-
 // Binary search
 template <typename Iterator, typename T>
 Iterator PmergeMe::BinarySearch(Iterator begin, Iterator end, const T &value) {
@@ -178,8 +158,12 @@ template <typename Container> void PmergeMe::Sort(Container &c) {
     losers.push_back(it->first);
   }
 
+  std::cout << "Losers.size() = " << losers.size() << std::endl;
   Container jacobsthal_order = JacobsthalInsertionOrder<Container>(
       losers.size()); // Get Jacobsthal order
+  std::cout << "Jacobsthal order: ";
+  PrintContainer(jacobsthal_order);
+  std::cout << std::endl;
 
   // Insert the losers into the winners in Jacobsthal order
   std::vector<bool> inserted(losers.size(),

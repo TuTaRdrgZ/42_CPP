@@ -33,8 +33,6 @@ private:
   PairVec CreatePairs(const Container &a, int &straggler, bool &hasStraggler);
 
   void SortEachPair(PairVec &split_array);
-  void Insert(IntPair element, PairVec &A, int n);
-  void InsertionSortPairs(PairVec &A, int n);
 
   template <typename Iterator, typename T>
   Iterator BinarySearch(Iterator begin, Iterator end, const T &value);
