@@ -44,29 +44,49 @@ bool BitcoinExchange::isValidDate(const std::string &date) const {
   if (date[4] != '-' || date[7] != '-')
     return false;
 
-  std::string year = date.substr(0, 4);
-  std::string month = date.substr(5, 2);
-  std::string day = date.substr(8, 2);
+  std::string yearStr = date.substr(0, 4);
+  std::string monthStr = date.substr(5, 2);
+  std::string dayStr = date.substr(8, 2);
 
-  for (size_t i = 0; i < year.size(); ++i) {
-    if (!std::isdigit(year[i]))
+  for (size_t i = 0; i < yearStr.size(); ++i) {
+    if (!std::isdigit(yearStr[i]))
       return false;
   }
-  for (size_t i = 0; i < month.size(); ++i) {
-    if (!std::isdigit(month[i]))
+  for (size_t i = 0; i < monthStr.size(); ++i) {
+    if (!std::isdigit(monthStr[i]))
       return false;
   }
-  for (size_t i = 0; i < day.size(); ++i) {
-    if (!std::isdigit(day[i]))
+  for (size_t i = 0; i < dayStr.size(); ++i) {
+    if (!std::isdigit(dayStr[i]))
       return false;
   }
 
-  int mon = std::atoi(month.c_str());
-  int d = std::atoi(day.c_str());
+  int year = std::atoi(yearStr.c_str());
+  int month = std::atoi(monthStr.c_str());
+  int day = std::atoi(dayStr.c_str());
 
-  if (mon < 1 || mon > 12)
+  if (month < 1 || month > 12)
     return false;
-  if (d < 1 || d > 31)
+
+  int maxDay;
+  switch (month) {
+    case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+      maxDay = 31;
+      break;
+    case 4: case 6: case 9: case 11:
+      maxDay = 30;
+      break;
+    case 2:
+      if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+        maxDay = 29;
+      else
+        maxDay = 28;
+      break;
+    default:
+      return false;
+  }
+
+  if (day < 1 || day > maxDay)
     return false;
 
   return true;
