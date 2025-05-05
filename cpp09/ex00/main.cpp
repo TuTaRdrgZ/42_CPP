@@ -10,23 +10,28 @@ int main(int argc, char *argv[]) {
     std::cerr << "Could not open file" << std::endl;
     return 1;
   }
-  BitcoinExchange exchange("data.csv");
+  try {
+    BitcoinExchange exchange("data.csv");
 
-  std::string line;
-  bool firstLine = true;
-  while (std::getline(file, line)) {
-    if (line.empty()) {
-      continue;
-    }
-    if (firstLine) {
-      firstLine = false;
-      if (line.find("date") != std::string::npos &&
-          line.find("value") != std::string::npos)
+    std::string line;
+    bool firstLine = true;
+    while (std::getline(file, line)) {
+      if (line.empty()) {
         continue;
+      }
+      if (firstLine) {
+        firstLine = false;
+        if (line.find("date") != std::string::npos &&
+            line.find("value") != std::string::npos)
+          continue;
+      }
+      if (!exchange.ProcessLine(line)) {
+        continue;
+      }
     }
-    if (!exchange.ProcessLine(line)) {
-      continue;
-    }
+  } catch (const std::exception &e) {
+    std::cerr << "Error: " << e.what() << std::endl;
+    return 1;
   }
   file.close();
   return 0;
