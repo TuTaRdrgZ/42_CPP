@@ -13,6 +13,7 @@ PmergeMe::PmergeMe(const PmergeMe &src) {
     deque_ = src.deque_;
   }
 }
+
 PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
   if (this != &other) {
     vector_ = other.vector_;
@@ -20,6 +21,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
   }
   return *this;
 }
+
 PmergeMe::~PmergeMe() {}
 
 // Prints all elements in the container separated by spaces.
@@ -64,7 +66,8 @@ void PmergeMe::ParseInput(char **args) {
   }
 }
 
-// Calculates the n-th Jacobsthal number. J(n)=J(n−1)+2⋅J(n−2) = 1 3 5 11 21 43 85 171...
+// Calculates the n-th Jacobsthal number. J(n)=J(n−1)+2⋅J(n−2) = 1 3 5 11 21 43
+// 85 171...
 int PmergeMe::Jacobsthal(int n) {
   if (n == 1)
     return 1;
@@ -158,16 +161,11 @@ template <typename Container> void PmergeMe::Sort(Container &c) {
     losers.push_back(it->first);
   }
 
-  std::cout << "Losers.size() = " << losers.size() << std::endl;
-  Container jacobsthal_order = JacobsthalInsertionOrder<Container>(
-      losers.size()); // Get Jacobsthal order
-  std::cout << "Jacobsthal order: ";
-  PrintContainer(jacobsthal_order);
-  std::cout << std::endl;
+  Container jacobsthal_order =
+      JacobsthalInsertionOrder<Container>(losers.size());
 
   // Insert the losers into the winners in Jacobsthal order
-  std::vector<bool> inserted(losers.size(),
-                             false); // Tracking inserted elements
+  std::vector<bool> inserted(losers.size(), false);
   for (typename Container::iterator it = jacobsthal_order.begin();
        it != jacobsthal_order.end(); ++it) {
     if (static_cast<size_t>(*it) < losers.size() && !inserted[*it]) {
