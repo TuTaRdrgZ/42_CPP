@@ -7,11 +7,8 @@
 #include <utility>
 #include <vector>
 
-typedef std::vector<int> IntVec;
-typedef std::deque<int> IntDeque;
 typedef std::pair<int, int> IntPair;
 typedef std::vector<IntPair> PairVec;
-typedef std::vector<int>::value_type ValueType;
 
 class PmergeMe {
 private:
@@ -38,14 +35,6 @@ private:
   Iterator BinarySearch(Iterator begin, Iterator end, const T &value);
 
   template <typename Container> void Sort(Container &c);
-
-  // recursive:
-  template <typename Container>
-  void FordJohnsonSort(Container &c, int pair_level);
-  template <typename Container> void SortRecursive(Container &c);
-  template <typename Container>
-  void InsertPendIntoMain(Container &main, Container &pend, ValueType odd,
-                          bool is_odd);
 
 public:
   PmergeMe(char **args);
