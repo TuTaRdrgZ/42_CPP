@@ -87,7 +87,7 @@ template <typename Container>
 Container PmergeMe::JacobsthalInsertionOrder(size_t length) {
   Container result;
   int index = 3;
-  while (length > 1 && static_cast<size_t>(Jacobsthal(index)) < length - 1) {
+  while (length > 1 && static_cast<size_t>(Jacobsthal(index)) < length) {
     result.push_back(Jacobsthal(index));
     ++index;
   }
